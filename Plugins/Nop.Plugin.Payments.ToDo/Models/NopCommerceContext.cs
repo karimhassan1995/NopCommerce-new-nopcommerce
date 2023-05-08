@@ -41,7 +41,7 @@ namespace Nop.Web.Models
 
             modelBuilder.Entity<ToDeo>(entity =>
             {
-                entity.Property(e => e.ID).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -46,6 +46,8 @@
     <None Remove="Views\ToDoes\Index.cshtml" />
 
     <None Remove="Views\ToDoes\New.cshtml" />
+
+    <None Remove="Views\_ViewImports.cshtml" />
     
   </ItemGroup>
 
@@ -97,6 +99,10 @@
    
     <Content Include="Views\ToDoes\Index.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+   
+    <Content Include="Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
  
   </ItemGroup>

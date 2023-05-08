@@ -10,10 +10,10 @@ using Nop.Core;
 namespace Nop.Plugin.Payments.ToDo.Models
 {
     [Table("ToDo")]
-    public partial class ToDeo : BaseEntity
+    public partial class ToDeo 
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [StringLength(255)]
         [Unicode(false)]
         public string ToDoName { get; set; }

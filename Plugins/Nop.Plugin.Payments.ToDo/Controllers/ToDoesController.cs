@@ -43,7 +43,7 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
             }
 
             var toDo =  _context.ToDos
-                .FirstOrDefault(m => m.ID == id);
+                .FirstOrDefault(m => m.Id == id);
             if (toDo == null)
             {
                 return NotFound();
@@ -64,13 +64,13 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("ID,ToDoName,ToDoDescription")] ToDeo toDo)
+        public IActionResult Create([Bind("Id,ToDoName,ToDoDescription")] ToDeo toDo)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(toDo);
                 _context.SaveChanges();
-                return RedirectToAction("~/Plugins/Payments.ToDo/Views/ToDoes/Index.cshtml");
+                return RedirectToAction(nameof(Index));
             }
             return View("~/Plugins/Payments.ToDo/Views/ToDoes/New.cshtml" , toDo);
         }
@@ -96,9 +96,9 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ID,ToDoName,ToDoDescription")] ToDeo toDo)
+        public IActionResult Edit(int id, [Bind("Id,ToDoName,ToDoDescription")] ToDeo toDo)
         {
-            if (id != toDo.ID)
+            if (id != toDo.Id)
             {
                 return NotFound();
             }
@@ -112,7 +112,7 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ToDoExists(toDo.ID))
+                    if (!ToDoExists(toDo.Id))
                     {
                         return NotFound();
                     }
@@ -135,7 +135,7 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
             }
 
             var toDo =  _context.ToDos
-                .FirstOrDefault(m => m.ID == id);
+                .FirstOrDefault(m => m.Id == id);
             if (toDo == null)
             {
                 return NotFound();
@@ -165,7 +165,7 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
 
         private bool ToDoExists(int id)
         {
-          return _context.ToDos.Any(e => e.ID == id);
+          return _context.ToDos.Any(e => e.Id == id);
         }
     }
 }
