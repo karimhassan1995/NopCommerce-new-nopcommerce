@@ -37,8 +37,6 @@
 
     <None Remove="Views\pick.cshtml" />
 
-    <None Remove="Views\ToDoes\Create.cshtml" />
-
     <None Remove="Views\ToDoes\Delete.cshtml" />
 
     <None Remove="Views\ToDoes\Details.cshtml" />
@@ -46,6 +44,8 @@
     <None Remove="Views\ToDoes\Edit.cshtml" />
 
     <None Remove="Views\ToDoes\Index.cshtml" />
+
+    <None Remove="Views\ToDoes\New.cshtml" />
     
   </ItemGroup>
 
@@ -59,19 +59,19 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
    
-    <Content Include="Views\Mangos\pick.cshtml">
+    <Content Include="Views\Mangos\Pick.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
    
-    <Content Include="Views\pick.cshtml">
+    <Content Include="Views\Pick.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
    
-    <Content Include="Views\ToDoes\Create.cshtml">
+    <Content Include="Views\ToDoes\New.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

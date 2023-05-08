@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Nop.Plugin.Payments.Book.Models
+namespace Nop.Plugin.Payments.ToDo.Models
 {
     [Table("Book")]
     public partial class Book

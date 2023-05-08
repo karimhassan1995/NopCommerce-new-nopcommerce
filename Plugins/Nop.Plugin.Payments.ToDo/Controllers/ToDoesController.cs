@@ -10,6 +10,7 @@ using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Framework;
 using Nop.Web.Models;
 using Nop.Web.Controllers;
+using Nop.Plugin.Payments.ToDo.Models;
 
 namespace Nop.Plugin.Payments.ToDo.Controllers
 {
@@ -25,35 +26,37 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
         }*/
       
         // GET: ToDoes
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
+        
         {
-            return View(await _context.ToDos.ToListAsync());
+            return View("~/Plugins/Payments.ToDo/Views/ToDoes/Index.cshtml" , _context.ToDos.ToList());
         }
 
        
 
         // GET: ToDoes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null || _context.ToDos == null)
             {
                 return NotFound();
             }
 
-            var toDo = await _context.ToDos
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var toDo =  _context.ToDos
+                .FirstOrDefault(m => m.ID == id);
             if (toDo == null)
             {
                 return NotFound();
             }
 
-            return View(toDo);
+            return View("~/Plugins/Payments.ToDo/Views/ToDoes/Details.cshtml" , toDo);
         }
 
         // GET: ToDoes/Create
-        public IActionResult Create()
+        [HttpGet]
+        public IActionResult New()
         {
-            return View();
+            return View("~/Plugins/Payments.ToDo/Views/ToDoes/New.cshtml");
         }
 
         // POST: ToDoes/Create
@@ -61,31 +64,31 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,ToDoName,ToDoDescription")] ToDeo toDo)
+        public IActionResult Create([Bind("ID,ToDoName,ToDoDescription")] ToDeo toDo)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(toDo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _context.SaveChanges();
+                return RedirectToAction("~/Plugins/Payments.ToDo/Views/ToDoes/Index.cshtml");
             }
-            return View(toDo);
+            return View("~/Plugins/Payments.ToDo/Views/ToDoes/New.cshtml" , toDo);
         }
 
         // GET: ToDoes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null || _context.ToDos == null)
             {
                 return NotFound();
             }
 
-            var toDo = await _context.ToDos.FindAsync(id);
+            var toDo =  _context.ToDos.Find(id);
             if (toDo == null)
             {
                 return NotFound();
             }
-            return View(toDo);
+            return View("~/Plugins/Payments.ToDo/Views/ToDoes/Edit.cshtml", toDo);
         }
 
         // POST: ToDoes/Edit/5
@@ -93,7 +96,7 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ToDoName,ToDoDescription")] ToDeo toDo)
+        public IActionResult Edit(int id, [Bind("ID,ToDoName,ToDoDescription")] ToDeo toDo)
         {
             if (id != toDo.ID)
             {
@@ -105,7 +108,7 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
                 try
                 {
                     _context.Update(toDo);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -118,46 +121,46 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("~/Plugins/Payments.ToDo/Views/ToDoes/Index.cshtml");
             }
-            return View(toDo);
+            return View("~/Plugins/Payments.ToDo/Views/ToDoes/Edit.cshtml", toDo);
         }
 
         // GET: ToDoes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null || _context.ToDos == null)
             {
                 return NotFound();
             }
 
-            var toDo = await _context.ToDos
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var toDo =  _context.ToDos
+                .FirstOrDefault(m => m.ID == id);
             if (toDo == null)
             {
                 return NotFound();
             }
 
-            return View(toDo);
+            return View("~/Plugins/Payments.ToDo/Views/ToDoes/Delete.cshtml", toDo);
         }
 
         // POST: ToDoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
             if (_context.ToDos == null)
             {
                 return Problem("Entity set 'NopCommerceContext.ToDos'  is null.");
             }
-            var toDo = await _context.ToDos.FindAsync(id);
+            var toDo =  _context.ToDos.Find(id);
             if (toDo != null)
             {
                 _context.ToDos.Remove(toDo);
             }
             
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            _context.SaveChanges();
+            return RedirectToAction("~/Plugins/Payments.ToDo/Views/ToDoes/Index.cshtml");
         }
 
         private bool ToDoExists(int id)

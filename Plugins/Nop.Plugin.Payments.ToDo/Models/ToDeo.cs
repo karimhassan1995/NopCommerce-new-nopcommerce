@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Nop.Core;
 
-namespace Nop.Web.Models
+namespace Nop.Plugin.Payments.ToDo.Models
 {
     [Table("ToDo")]
     public partial class ToDeo : BaseEntity

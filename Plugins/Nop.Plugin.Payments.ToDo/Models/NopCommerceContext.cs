@@ -4,7 +4,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Nop.Plugin.Payments.Book.Models;
+
+using Nop.Plugin.Payments.ToDo.Models;
 
 namespace Nop.Web.Models
 {

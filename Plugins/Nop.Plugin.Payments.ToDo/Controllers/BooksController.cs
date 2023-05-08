@@ -25,7 +25,7 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
         // GET: ToDoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Books.ToListAsync());
+            return View("~/Plugins/Payments.ToDo/Views/Books/Index.cshtml", _context.Books.ToListAsync());
             /* return View(await _context.Books.ToListAsync());*/
         }
     }

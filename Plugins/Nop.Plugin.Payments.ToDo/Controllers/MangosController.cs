@@ -11,6 +11,7 @@ using Nop.Web.Controllers;
 using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Framework;
 using Nop.Web.Models;
+using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
 
 namespace Nop.Plugin.Payments.ToDo.Controllers
 {
@@ -19,10 +20,12 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
     {
         public MangosController() { }
 
-        public IActionResult pick()
+        public IActionResult Pick()
         
         {
-            return View("~/Plugins/Payments.ToDo/Views/pick.cshtml");
+            int x = 10;
+            ViewData["Title"] = x;
+            return View("~/Plugins/Payments.ToDo/Views/Mangos/pick.cshtml" , x);
         }
 
     }
