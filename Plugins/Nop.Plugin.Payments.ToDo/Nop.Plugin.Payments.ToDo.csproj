@@ -35,6 +35,10 @@
 
     <None Remove="Views\Mangos\pick.cshtml" />
 
+    <None Remove="Views\pick.cshtml" />
+
+    <None Remove="Views\ToDoes\Create.cshtml" />
+
     <None Remove="Views\ToDoes\Delete.cshtml" />
 
     <None Remove="Views\ToDoes\Details.cshtml" />
@@ -42,8 +46,6 @@
     <None Remove="Views\ToDoes\Edit.cshtml" />
 
     <None Remove="Views\ToDoes\Index.cshtml" />
-
-    <None Remove="Views\_ViewImports.cshtml" />
     
   </ItemGroup>
 
@@ -63,27 +65,38 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
    
+    <Content Include="Views\pick.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+   
+    <Content Include="Views\ToDoes\Create.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+   
     <Content Include="Views\ToDoes\Delete.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
    
     <Content Include="Views\ToDoes\Details.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
    
     <Content Include="Views\ToDoes\Edit.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
    
     <Content Include="Views\ToDoes\Index.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-   
-    <Content Include="Views\_ViewImports.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
  
   </ItemGroup>
@@ -99,17 +112,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="7.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Views\ToDoes\kosomk.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </None>
-    <None Update="Views\ToDoes\Create.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </None>
   </ItemGroup>
 
 

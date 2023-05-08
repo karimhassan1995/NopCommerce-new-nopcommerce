@@ -14,16 +14,15 @@ using Nop.Web.Models;
 
 namespace Nop.Plugin.Payments.ToDo.Controllers
 {
-    [AutoValidateAntiforgeryToken]
-    [AuthorizeAdmin] //confirms access to the admin panel
-    [Area(AreaNames.Admin)] //specifies the area containing a controller or action
+   
     public class MangosController : BasePublicController
     {
         public MangosController() { }
 
         public IActionResult pick()
+        
         {
-            return View("~/Plugins/Payments.ToDo/Views/Mangos/pick.cshtml");
+            return View("~/Plugins/Payments.ToDo/Views/pick.cshtml");
         }
 
     }

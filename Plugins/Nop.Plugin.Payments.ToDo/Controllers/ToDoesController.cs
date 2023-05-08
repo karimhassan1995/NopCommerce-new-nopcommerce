@@ -9,12 +9,11 @@ using Nop.Core.Domain.Security;
 using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Framework;
 using Nop.Web.Models;
+using Nop.Web.Controllers;
 
 namespace Nop.Plugin.Payments.ToDo.Controllers
 {
-    [AutoValidateAntiforgeryToken]
-    [AuthorizeAdmin] //confirms access to the admin panel
-    [Area(AreaNames.Admin)] //specifies the area containing a controller or action
+ 
     public class ToDoesController : Controller
     {
         /*private readonly NopCommerceContext _context;*/
@@ -28,13 +27,10 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
         // GET: ToDoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Books.ToListAsync());
+            return View(await _context.ToDos.ToListAsync());
         }
 
-        public IActionResult Kosomk()
-        {
-            return View();
-        }
+       
 
         // GET: ToDoes/Details/5
         public async Task<IActionResult> Details(int? id)

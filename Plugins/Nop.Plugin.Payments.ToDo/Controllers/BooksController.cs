@@ -8,12 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Framework;
 using Nop.Web.Models;
+using Nop.Web.Controllers;
 
 namespace Nop.Plugin.Payments.ToDo.Controllers
 {
-    [AutoValidateAntiforgeryToken]
-    [AuthorizeAdmin] //confirms access to the admin panel
-    [Area(AreaNames.Admin)] //specifies the area containing a controller or action
+
     public class BooksController : Controller
     {
         private readonly NopCommerceContext _context = new NopCommerceContext();
