@@ -1,4 +1,4 @@
-﻿using Autofac.Extensions.DependencyInjection;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -43,5 +43,7 @@ var app = builder.Build();
 //configure the application HTTP request pipeline
 app.ConfigureRequestPipeline();
 app.StartEngine();
+
+app.MapControllers();
 
 app.Run();

@@ -1,79 +1,267 @@
-﻿@model IEnumerable<Nop.Plugin.Payments.ToDo.Models.ToDeo>
+﻿
+@using Nop.Web.Areas.Admin.Components;
+@using DevExtreme.AspNet.Mvc;
+@using Nop.Plugin.Payments.ToDo.Models;
+@model IEnumerable<Nop.Plugin.Payments.ToDo.Models.ToDeo> 
+
 
 @{
-    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml"; 
+
+
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ToDoes List</title>
+    @*Dev express libraries*@
+    <!link href="/css/devextreme/dx.light.css" rel="stylesheet" />
+    <!script src="/js/devextreme/jquery.js"></!script>
+    <!link href="/css/devextreme/bootstrap.css" rel="stylesheet" />
+    <!script src="/js/devextreme/bootstrap.js" asp-location="Head"></!script>
+    <!script src="/js/devextreme/dx.all.js" asp-location="Head"></!script>
+    <!script src="/js/devextreme/aspnet/dx.aspnet.mvc.js" asp-location="Head"></!script>
+    <!script src="/js/devextreme/aspnet/dx.aspnet.data.js" asp-location="Head"></!script>
+    @*  Dev express libraries*@
 
-<p>
-    <a asp-action="New" asp-controller="ToDoes">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ToDoName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ToDoDescription)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ToDoName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ToDoDescription)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+</head>
+<body>
+
+
+   @* <!script>
+        function CreateInputElement(itemName, itemValue, itemIndex, container) {
+        var $input = $(" <input />");
+        $input.appendTo(container).attr({ type: "hidden", name:  itemName }).val(itemValue);
         }
-    </tbody>
-</table>
+
+
+        function clickHandler(e) {
+        $("#grid").dxDataGrid("instance").getDataSource().load().done(function (items) {
+        for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        for (var property in item) {
+        if (item.hasOwnProperty(property)) {
+        CreateInputElement(property, item[property], i, $("#editEmployee")[0]);
+        }
+        }
+        }
+        $("#editEmployee").submit();
+
+        })
+
+        }
+
+        $(function(){
+        $("#grid").dxDataGrid({
+        onRowRemoving: function(e) {
+        var deferred = $.Deferred();
+        $.ajax({
+        url: `/ToDoes/DeleteConfirmed/${e.row.key}`,
+        type: 'Delete',
+        data: {
+        type: e.row
+        },
+        success: function(validationResult) {
+        if (validationResult.errorText) {
+        deferred.reject(validationResult.errorText);
+        } else {
+        deferred.resolve(false);
+        }
+        },
+        error: function() {
+        deferred.reject("Data Loading Error");
+        },
+        timeout: 5000
+        });
+        e.cancel = deferred.promise();
+        },
+        })
+        })
+
+  
+    </!script>*@
 
 
 
 
-<assemblies>
-    <add assembly="DevExpress.Utils.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <add assembly="DevExpress.Data.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <add assembly="DevExpress.Web.ASPxThemes.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <add assembly="DevExpress.RichEdit.v17.1.Core, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <add assembly="DevExpress.Printing.v17.1.Core, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <add assembly="DevExpress.Web.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <add assembly="DevExpress.Web.Mvc5.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-</assemblies>
+    
+
+
+  @*  @(
+       
+    Html.DevExtreme().DataGrid
+    <Nop.Plugin.Payments.ToDo.Models.ToDeo>
+        ()
+        .ID("grid")
+        .ShowBorders(true)
+        .DataSource(d => d.Mvc().Controller("ToDoes")
+        .LoadAction("Index")
+        .UpdateAction("Edits")
+        .DeleteAction("DeleteConfirmed").Key("Id"))
+        .Editing(s => s.AllowUpdating(true).AllowAdding(true).AllowDeleting(true).Mode(GridEditMode.Cell)
+        .RefreshMode(GridEditRefreshMode.Reshape))
+        .KeyExpr( "Id" )
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.Id);
+            columns.AddFor(m => m.ToDoName);
+            columns.AddFor(m => m.ToDoDescription);
+        })
+        .Paging(p => p.PageSize(10))
+        )*@
 
 
 
+    @*@(Html.DevExtreme().DataGrid<Nop.Plugin.Payments.ToDo.Models.ToDeo>()
+        .ID("grid")
+        .DataSource(d => d.Mvc()
+        .Controller("ToDoes")
+        .LoadAction("List")
+        .UpdateAction("Edits")
+        .DeleteAction("DeleteConfirmed")
+        .Key("Id")
+        .OnBeforeSend("beforeSend")
+        )
+        .ShowBorders(true)
+        .RepaintChangesOnly(true)
+        .Scrolling(s => s.Mode(GridScrollingMode.Virtual))
+        .Editing(e => e
+        .Mode(GridEditMode.Cell)
+        .RefreshMode(GridEditRefreshMode.Reshape)
+        .AllowDeleting(true)
+        .AllowUpdating(true)
+        )
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.Id)
+            .Lookup(lookup => lookup
+            .DataSource(d => d.Mvc()
+            .Controller("ToDoes")
+            .LoadAction("Index")
+            .LoadMode(DataSourceLoadMode.Raw)
+            .Key("Id")
+            .OnBeforeSend("beforeSend")
+            )
+            .DataSourceOptions(o => o.Paginate(true))
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+            );
+
+            
+
+            columns.AddFor(m => m.ToDoName);
+
+            columns.AddFor(m => m.ToDoDescription)
+            .Lookup(lookup => lookup
+            .DataSource(d => d.Mvc()
+            .Controller("ToDoes")
+            .LoadAction("Index")
+            .LoadMode(DataSourceLoadMode.Raw)
+            .Key("Value")
+            .OnBeforeSend("beforeSend")
+            )
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+            );
+
+        })
+        .Summary(s => s
+        .TotalItems(totalItems =>
+        {
+            totalItems.AddFor(t => t.Id).SummaryType(SummaryType.Count);
+            totalItems.AddFor(t => t.ToDoName).ValueFormat("#0.00").SummaryType(SummaryType.Sum);
+        })
+        )
+        )
+    <div class="options">
+        <div class="caption">Options</div>
+        <div class="option">
+            <span>Refresh Mode:</span>
+            @(Html.DevExtreme().SelectBox()
+                .ID("refresh-mode")
+                .DataSource(new[] { "full", "reshape", "repaint" })
+                .Value("reshape")
+                .OnValueChanged(@<text>
+                    function(e) {
+                    $("#grid").dxDataGrid("instance").option("editing.refreshMode", e.value);
+                    }
+                </text>)
+                )
+        </div>
+        <div id="requests">
+            <div>
+                <div class="caption">Network Requests</div>
+                @(Html.DevExtreme().Button()
+                    .ID("clear")
+                    .Text("Clear")
+                    .OnClick(@<text>
+                        function() {
+                        $("#requests ul").empty();
+                        }
+                    </text>)
+                    )
+            </div>
+            <ul></ul>
+        </div>
+    </div>
+    <script>
+        function beforeSend(operation, ajaxSettings) {
+            var data = ajaxSettings.data || {},
+                args = Object.keys(data).map(function (key) {
+                    return key + "=" + data[key];
+                }).join(" ");
+
+            var logList = $("#requests ul"),
+                time = DevExpress.localization.formatDate(new Date(), "HH:mm:ss"),
+                newItem = $("<li>").text([time, ajaxSettings.method, ajaxSettings.url, args].join(" "));
+
+            logList.prepend(newItem);
+        }
+    </script>*@
 
 
-                    @(Html.DevExtreme().DataGrid<Nop.Plugin.Payments.ToDo.Models.ToDeo>()
-    .DataSource(ds => ds.WebApi()
+
+    @(Html.DevExtreme().DataGrid<Nop.Plugin.Payments.ToDo.Models.ToDeo>()
+        .ID("grid")
+        .ShowBorders(true)
+        .Paging(paging => paging.Enabled(false))
+        .Editing(editing =>
+        {
+            editing.Mode(GridEditMode.Form);
+            editing.AllowUpdating(true);
+            editing.AllowAdding(true);
+            editing.AllowDeleting(true);
+        })
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.Id)
+            .Width(70);
+
+            columns.AddFor(m => m.ToDoName);
+
+            columns.AddFor(m => m.ToDoDescription);
+
+            
+
+        })
+        .DataSource(d => d.Mvc()
         .Controller("ToDoes")
         .LoadAction("Get")
+        .UpdateAction("Put")
+        .InsertAction("Post")
+        .DeleteAction("Delete")
         .Key("Id")
-    )
-    .RemoteOperations(true)
-    .Columns(columns => {
-
-        columns.AddFor(m => m.Id);
-
-        columns.AddFor(m => m.ToDoName);
-
-        columns.AddFor(m => m.ToDoDescription);
-    })
-)
+        )
+        )
 
 
 
+
+            
+
+
+
+
+</body>
+</html>

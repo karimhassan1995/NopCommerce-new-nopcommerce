@@ -10,7 +10,12 @@ using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Framework;
 using Nop.Web.Models;
 using Nop.Web.Controllers;
+
 using Nop.Plugin.Payments.ToDo.Models;
+using static Nop.Services.Common.NopLinksDefaults;
+using DevExtreme.AspNet.Data;
+using DevExtreme.AspNet.Mvc;
+using Newtonsoft.Json;
 
 namespace Nop.Plugin.Payments.ToDo.Controllers
 {
@@ -27,12 +32,60 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
       
         // GET: ToDoes
         public IActionResult Index()
-        
         {
+  
             return View("~/Plugins/Payments.ToDo/Views/ToDoes/Index.cshtml" , _context.ToDos.ToList());
         }
 
-       
+        [HttpGet]
+        public object Get(DataSourceLoadOptions loadOptions)
+        {
+            return DataSourceLoader.Load(_context.ToDos, loadOptions);
+        }
+
+        [HttpPut]
+        public IActionResult Put(int key, string values)
+        {
+            var employee = _context.ToDos.First(a => a.Id == key);
+            JsonConvert.PopulateObject(values, employee);
+
+            /*if (!TryValidateModel(employee))
+                return BadRequest(ModelState.GetFullErrorMessage());*/
+
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult Post(string values)
+        {
+            var todo = new ToDeo();
+            JsonConvert.PopulateObject(values, todo);
+
+          /*  if (!TryValidateModel(newEmployee))
+                return BadRequest(ModelState.GetFullErrorMessage());*/
+
+            _context.ToDos.Add(todo);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+
+        [HttpDelete]
+        public void Delete(int key)
+        {
+            var employee = _context.ToDos.First(a => a.Id == key);
+            _context.ToDos.Remove(employee);
+            _context.SaveChanges();
+        }
+
+       /* public object List(DataSourceLoadOptions loadOptions)
+        {
+            return DataSourceLoader.Load(_context.ToDos, loadOptions);
+        }
+
 
         // GET: ToDoes/Details/5
         public IActionResult Details(int? id)
@@ -70,7 +123,7 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
             {
                 _context.Add(toDo);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index" , "ToDoes");
             }
             return View("~/Plugins/Payments.ToDo/Views/ToDoes/New.cshtml" , toDo);
         }
@@ -96,7 +149,7 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id,ToDoName,ToDoDescription")] ToDeo toDo)
+        public IActionResult Edits(int id, [Bind("Id,ToDoName,ToDoDescription")] ToDeo toDo)
         {
             if (id != toDo.Id)
             {
@@ -121,7 +174,7 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("~/Plugins/Payments.ToDo/Views/ToDoes/Index.cshtml");
+                return RedirectToAction("Index", "ToDoes");
             }
             return View("~/Plugins/Payments.ToDo/Views/ToDoes/Edit.cshtml", toDo);
         }
@@ -160,12 +213,12 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
             }
             
             _context.SaveChanges();
-            return RedirectToAction("~/Plugins/Payments.ToDo/Views/ToDoes/Index.cshtml");
+            return RedirectToAction("Index", "ToDoes");
         }
 
         private bool ToDoExists(int id)
         {
           return _context.ToDos.Any(e => e.Id == id);
-        }
+        }*/
     }
 }

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Nop.Plugin.Payments.ToDo.Model.Book>
+﻿@model IEnumerable<Nop.Plugin.Payments.ToDo.Models.Book>
+@using Nop.Plugin.Payments.ToDo.Models;
 @*@using DevExpress.Web.Mvc.UI*@
 
 @{
@@ -14,10 +15,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ToDoName)
+                @Html.DisplayNameFor(model => model.BookName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ToDoDescription)
+                @Html.DisplayNameFor(model => model.BookDescription)
             </th>
             <th></th>
         </tr>
@@ -27,10 +28,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ToDoName)
+                    @Html.DisplayFor(modelItem => item.BookName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ToDoDescription)
+                    @Html.DisplayFor(modelItem => item.BookDescription)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

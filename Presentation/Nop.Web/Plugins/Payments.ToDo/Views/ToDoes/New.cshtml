@@ -1,43 +1,102 @@
-﻿@model Nop.Plugin.Payments.ToDo.Models.ToDeo
+﻿
+@using Nop.Web.Areas.Admin.Components;
+@using DevExtreme.AspNet.Mvc;
+@using Nop.Plugin.Payments.ToDo.Models;
+@model Nop.Plugin.Payments.ToDo.Models.ToDeo
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
 }
 
-<h1>Create</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ToDoes New</title>
+    @*Dev express libraries*@
+    <!link href="/css/devextreme/dx.light.css" rel="stylesheet" />
+    <!script src="/js/devextreme/jquery.js"></!script>
+    <!link href="/css/devextreme/bootstrap.css" rel="stylesheet" />
+    <!script src="/js/devextreme/bootstrap.js" asp-location="Head"></!script>
+    <!script src="/js/devextreme/dx.all.js" asp-location="Head"></!script>
+    <!script src="/js/devextreme/aspnet/dx.aspnet.mvc.js" asp-location="Head"></!script>
+    <!script src="/js/devextreme/aspnet/dx.aspnet.data.js" asp-location="Head"></!script>
+    @*  Dev express libraries*@
 
-<h4>ToDo</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="ToDoes" asp-action="Create" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ToDoName" class="control-label"></label>
-                <input asp-for="ToDoName" class="form-control" />
-                <span asp-validation-for="ToDoName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ToDoDescription" class="control-label"></label>
-                <input asp-for="ToDoDescription" class="form-control" />
-                <span asp-validation-for="ToDoDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+</head>
+<body>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+                <!script>
+    function CreateInputElement(itemName, itemValue, itemIndex, container) {
+        var $input = $("<input/>");
+
+        $input.appendTo(container).attr({ type: "hidden", name:  itemName }).val(itemValue);
+    }
+    function clickHandler(e) {
+       
+            $("#grid").dxDataGrid("instance").getDataSource().load().done(function (items) {
+                for (var i = 0; i < items.length; i++) {
+                    var item = items[i];
+                    for (var property in item) {
+                        if (item.hasOwnProperty(property)) {
+                            CreateInputElement(property, item[property], i, $("#editEmployee")[0]);
+                        }
+                    }
+                }
+                $("#editEmployee").submit();
+
+            })
+        
+    }
+</!script>
+
+
+
+@using (Html.BeginForm("Create", "ToDoes", FormMethod.Post, new { id = "editEmployee" }))
+{
+   
+        @(Html.DevExtreme().DataGrid<Nop.Plugin.Payments.ToDo.Models.ToDeo>()
+            .ID("grid")
+            .ShowBorders(true)
+            .Editing(s => s.AllowUpdating(true).AllowAdding(true).AllowDeleting(true))
+            .KeyExpr("Id")
+            .DataSource(new JS("[]"))
+            
+            .Columns(columns =>
+            {
+                    columns.AddFor(m => m.Id);
+                    columns.AddFor(m => m.ToDoName);
+                    columns.AddFor(m => m.ToDoDescription);
+             
+            })
+            .Paging(p => p.PageSize(10))
+            .FilterRow(f => f.Visible(true))
+            .HeaderFilter(f => f.Visible(true))
+            .GroupPanel(p => p.Visible(true))
+            .Grouping(g => g.AutoExpandAll(false))
+            .RemoteOperations(false)
+                    );
 }
+
+
+
+
+
+@(Html.DevExtreme().Button()
+        .Text("Validate and Submit")
+        .OnClick("clickHandler")
+       
+    )
+
+
+@Html.ValidationSummary()
+
+
+
+
+
+</body>
+</html>

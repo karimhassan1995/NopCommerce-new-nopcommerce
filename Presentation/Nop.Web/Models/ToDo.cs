@@ -12,7 +12,7 @@ namespace Nop.Web.Models
     public partial class ToDo
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [StringLength(255)]
         [Unicode(false)]
         public string ToDoName { get; set; }

@@ -9,6 +9,7 @@ using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Framework;
 using Nop.Web.Models;
 using Nop.Web.Controllers;
+using Nop.Plugin.Payments.ToDo.Models;
 
 namespace Nop.Plugin.Payments.ToDo.Controllers
 {
@@ -23,9 +24,9 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
          }*/
 
         // GET: ToDoes
-        public async Task<IActionResult> Index()
+        public  IActionResult Index()
         {
-            return View("~/Plugins/Payments.ToDo/Views/Books/Index.cshtml", _context.Books.ToListAsync());
+            return View("~/Plugins/Payments.ToDo/Views/Books/Index.cshtml", _context.Books.ToList());
             /* return View(await _context.Books.ToListAsync());*/
         }
     }

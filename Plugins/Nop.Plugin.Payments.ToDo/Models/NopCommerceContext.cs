@@ -34,7 +34,7 @@ namespace Nop.Web.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Person>(entity =>
+            modelBuilder.Entity<Book>(entity =>
             {
                 entity.Property(e => e.ID).ValueGeneratedNever();
             });
