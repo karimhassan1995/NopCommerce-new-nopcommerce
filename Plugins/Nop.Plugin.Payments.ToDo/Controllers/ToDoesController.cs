@@ -22,14 +22,14 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
  
     public class ToDoesController : Controller
     {
-        /*private readonly NopCommerceContext _context;*/
-        private readonly NopCommerceContext _context = new NopCommerceContext();
+        private readonly NopCommerceContext _context;
+        /* private readonly NopCommerceContext _context = new NopCommerceContext();*/
 
-        /*public ToDoesController(NopCommerceContext context)
+        public ToDoesController(NopCommerceContext context)
         {
             _context = context;
-        }*/
-      
+        }
+
         // GET: ToDoes
         public IActionResult Index()
         {
@@ -81,7 +81,7 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
             _context.SaveChanges();
         }
 
-       /* public object List(DataSourceLoadOptions loadOptions)
+        public object List(DataSourceLoadOptions loadOptions)
         {
             return DataSourceLoader.Load(_context.ToDos, loadOptions);
         }
@@ -95,14 +95,14 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
                 return NotFound();
             }
 
-            var toDo =  _context.ToDos
+            var toDo = _context.ToDos
                 .FirstOrDefault(m => m.Id == id);
             if (toDo == null)
             {
                 return NotFound();
             }
 
-            return View("~/Plugins/Payments.ToDo/Views/ToDoes/Details.cshtml" , toDo);
+            return View("~/Plugins/Payments.ToDo/Views/ToDoes/Details.cshtml", toDo);
         }
 
         // GET: ToDoes/Create
@@ -123,9 +123,9 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
             {
                 _context.Add(toDo);
                 _context.SaveChanges();
-                return RedirectToAction("Index" , "ToDoes");
+                return RedirectToAction("Index", "ToDoes");
             }
-            return View("~/Plugins/Payments.ToDo/Views/ToDoes/New.cshtml" , toDo);
+            return View("~/Plugins/Payments.ToDo/Views/ToDoes/New.cshtml", toDo);
         }
 
         // GET: ToDoes/Edit/5
@@ -136,7 +136,7 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
                 return NotFound();
             }
 
-            var toDo =  _context.ToDos.Find(id);
+            var toDo = _context.ToDos.Find(id);
             if (toDo == null)
             {
                 return NotFound();
@@ -187,7 +187,7 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
                 return NotFound();
             }
 
-            var toDo =  _context.ToDos
+            var toDo = _context.ToDos
                 .FirstOrDefault(m => m.Id == id);
             if (toDo == null)
             {
@@ -206,19 +206,19 @@ namespace Nop.Plugin.Payments.ToDo.Controllers
             {
                 return Problem("Entity set 'NopCommerceContext.ToDos'  is null.");
             }
-            var toDo =  _context.ToDos.Find(id);
+            var toDo = _context.ToDos.Find(id);
             if (toDo != null)
             {
                 _context.ToDos.Remove(toDo);
             }
-            
+
             _context.SaveChanges();
             return RedirectToAction("Index", "ToDoes");
         }
 
         private bool ToDoExists(int id)
         {
-          return _context.ToDos.Any(e => e.Id == id);
-        }*/
+            return _context.ToDos.Any(e => e.Id == id);
+        }
     }
 }

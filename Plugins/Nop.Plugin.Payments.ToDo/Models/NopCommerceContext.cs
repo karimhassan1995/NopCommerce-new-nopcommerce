@@ -11,26 +11,26 @@ namespace Nop.Web.Models
 {
     public partial class NopCommerceContext : DbContext
     {
-        /*   public NopCommerceContext()
-           {
-           }
+        public NopCommerceContext()
+        {
+        }
 
-           public NopCommerceContext(DbContextOptions<NopCommerceContext> options)
-               : base(options)
-           {
-           }*/
+        public NopCommerceContext(DbContextOptions<NopCommerceContext> options)
+            : base(options)
+        {
+        }
 
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<ToDeo> ToDos { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+      /*  protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-          
+
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=LAPTOP-5HU625C7;Initial Catalog=NopCommerce;Integrated Security=True;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Data Source=LAPTOP-5HU625C7;Initial Catalog=NopCommerce;Integrated Security=True;TrustServerCertificate=True");
             base.OnConfiguring(optionsBuilder);
-            
-        }
+
+        }*/
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
